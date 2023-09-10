@@ -1,0 +1,13 @@
+```{r}
+library(vars)
+
+source("scripts/cleaning_factor_model.R")
+
+var_1<-VAR(states_ts,lag.max = 5,ic="AIC")
+ir.1<-irf(var_1,impulse = "California",response = "New.York",n.ahead = 20,ortho=FALSE)
+
+plot(ir.1)
+
+summary(var_1)
+```
+

@@ -1,0 +1,59 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r}
+
+library(tseries)
+
+
+source("scripts/cleaning.R")
+
+```
+
+
+```{r}
+
+source("scripts/graphs_intro.R")
+p
+q
+
+
+```
+
+
+
+
+
+```{r}
+#Use the dickeyfuller test on each column of the dataset
+dffunc<-function(x) ur.df(x,type="non",lags=2,selectlags = "AIC")
+sapply(low_state_diff,dffunc)
+
+
+
+```
+
+
+At the state level, all the data: 
+
+```{r}
+state_prices<-t(read.csv("Data/all_state.csv"))
+prices_diff<-read.csv("Data/prices_data.csv")
+labor_series<-read.csv("Data/labor_series.csv")
+
+state_names<-state_prices[1,]
+state_prices<-t(read.csv("Data/all_state.csv",row.names = state_names))
+state_prices<-state_prices[-c(1),]
+
+state_prices<-replace_na(state_prices,0)
+
+#Get rid of empty
+state_prices<-state_prices[,!head(state_prices,1)==0]
+
+
+```
+
+
+

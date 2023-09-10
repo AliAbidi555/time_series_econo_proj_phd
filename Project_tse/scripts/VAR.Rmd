@@ -1,0 +1,21 @@
+
+
+First consider a VAR using just the history of housing prices. 
+
+```{r}
+library(vars)
+var_low<-VAR(low_state_ts_diff,lag.max = 5,ic="AIC")
+
+
+
+summary(var_low)
+
+ir.low<-irf(var_low,impulse = "California",response = "California",n.ahead = 20,ortho=FALSE)
+
+plot(ir.low)
+
+
+
+```
+
+
